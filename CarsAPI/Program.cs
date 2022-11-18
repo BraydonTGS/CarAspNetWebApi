@@ -13,7 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Dependency Injection //
-builder.Services.AddScoped<IMakeRepository, MakeRepository>(); 
+builder.Services.AddScoped<IMakeRepository, MakeRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>(); 
 
 builder.Services.AddDbContext<CarDbContext>(options =>
 {
