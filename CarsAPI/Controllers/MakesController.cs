@@ -1,4 +1,6 @@
-﻿using CarsAPI.Interfaces;
+﻿using CarsAPI.EF;
+using CarsAPI.Interfaces;
+using CarsAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +37,19 @@ namespace CarsAPI.Controllers
                 return BadRequest("No Data was Found"); 
             }
             return Ok(make); 
+        }
+        [Route("AddMake")]
+        [HttpPost]
+        public IActionResult Create(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("No Make Specified."); 
+            }
+
+            var make = _makeRepository.CreateMake(name); 
+
+            return Ok(make);
         }
     }
 }
