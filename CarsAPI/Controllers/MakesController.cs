@@ -1,6 +1,5 @@
 ﻿using CarsAPI.EF;
 using CarsAPI.Interfaces;
-using CarsAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

@@ -13,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Dependency Injection //
+// How long are we going to be holding the instance for //
+// singelton - single instance // 
 builder.Services.AddScoped<IMakeRepository, MakeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>(); 
 

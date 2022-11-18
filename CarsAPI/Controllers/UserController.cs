@@ -38,7 +38,36 @@ namespace CarsAPI.Controllers
                 return BadRequest("User Not Found"); 
             }
 
-            return Ok(user);
+            return Ok(user); 
+        }
+
+        [Route("CreateNewUser")]
+        [HttpPost]
+        public IActionResult CreateNewUser(string first, string last, string email, string username)
+        {
+            if (string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(last) || string.IsNullOrWhiteSpace(email) ||string.IsNullOrWhiteSpace(username))
+            {
+                return BadRequest("Please Try Again"); 
+            }
+
+            _userRepository.CreateNewUser(first, last, email, username);
+
+            return GetAllUsers(); 
+        }
+
+        [Route("UpdateUser/{id}")]
+        [HttpPut]
+        public IActionResult UpdateUser(int id, string first, string last, string email, string username)
+        {
+            var user = _userRepository.GetUserById(id); 
+            if(user is null)
+            {
+                return BadRequest("User Not Found"); 
+            }
+
+            var updatedUser = _userRepository.UpdateUser(user, first, last, email, username);
+
+            return Ok(updatedUser); 
         }
 
 
