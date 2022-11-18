@@ -48,5 +48,11 @@ namespace CarsAPI.Repository
             return make;
             
         }
+
+        public void DeleteMake(Make make)
+        {
+            _context.Remove(make);
+            _context.SaveChanges();
+        }
     }
 }

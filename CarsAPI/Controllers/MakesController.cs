@@ -70,5 +70,21 @@ namespace CarsAPI.Controllers
 
             return Ok(updatedMake); 
         }
+
+        [Route("Delete/{id}")]
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var make = _makeRepository.GetMake(id); 
+
+            if(make is null)
+            {
+                return BadRequest("Model Not Found");
+            }
+
+             _makeRepository.DeleteMake(make); 
+
+            return Ok(GetAllMakes());
+        }
     }
 }

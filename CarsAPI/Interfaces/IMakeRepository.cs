@@ -10,5 +10,7 @@ namespace CarsAPI.Interfaces
         Make CreateMake(string name);
 
         Make UpdateMake(Make make, string name); 
+
+        void DeleteMake(Make make);
     }
 }
