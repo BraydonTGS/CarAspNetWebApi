@@ -7,6 +7,8 @@ namespace CarsAPI.Interfaces
         ICollection<Make> GetAllMakes(); 
         Make GetMake(int id);
 
-        Make CreateMake(string name); 
+        Make CreateMake(string name);
+
+        Make UpdateMake(Make make, string name); 
     }
 }

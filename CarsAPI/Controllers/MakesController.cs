@@ -17,7 +17,7 @@ namespace CarsAPI.Controllers
             _makeRepository = makeRepository;
         }
 
-        [Route("GetAll")]
+        [Route("GetAllMakes")]
         [HttpGet]
         public IActionResult GetAllMakes()
         {
@@ -38,7 +38,7 @@ namespace CarsAPI.Controllers
             }
             return Ok(make); 
         }
-        [Route("AddMake")]
+        [Route("AddNewMake")]
         [HttpPost]
         public IActionResult Create(string name)
         {
@@ -50,6 +50,25 @@ namespace CarsAPI.Controllers
             var make = _makeRepository.CreateMake(name); 
 
             return Ok(make);
+        }
+
+        [Route("UpdateMake/{id}")]
+        [HttpPut]
+        public IActionResult UpdateMake(int id, string name)
+        {
+            var updateMake = _makeRepository.GetMake(id); 
+            if(updateMake is null)
+            {
+                return BadRequest("Model Not Found!"); 
+            }
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("No Make Specified"); 
+            }
+      
+            var updatedMake = _makeRepository.UpdateMake(updateMake, name);
+
+            return Ok(updatedMake); 
         }
     }
 }

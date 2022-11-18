@@ -33,8 +33,19 @@ namespace CarsAPI.Repository
             _context.SaveChanges();
 
             return make;
-           
+         
+        }
 
+        public Make UpdateMake(Make make, string name)
+        {
+         
+            make.MakeName = name;
+
+            _context.Makes.Attach(make);
+
+            _context.SaveChanges();
+
+            return make;
             
         }
     }
