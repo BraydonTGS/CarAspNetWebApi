@@ -15,5 +15,10 @@ namespace CarsAPI.Repository
         {
             return _context.Makes.ToList(); 
         }
+
+        public Make GetMake(int id)
+        {
+            return _context.Makes.Where(m => m.MakeId == id).FirstOrDefault(); 
+        }
     }
 }

@@ -15,12 +15,26 @@ namespace CarsAPI.Controllers
             _makeRepository = makeRepository;
         }
 
+        [Route("GetAll")]
         [HttpGet]
         public IActionResult GetAllMakes()
         {
             var makes = _makeRepository.GetAllMakes();
 
             return Ok(makes);
+        }
+
+        [Route("GetMake/{id}")]
+        [HttpGet]
+        public IActionResult GetMake(int id)
+        {
+            var make = _makeRepository.GetMake(id);
+
+            if(make is null)
+            {
+                return BadRequest("No Data was Found"); 
+            }
+            return Ok(make); 
         }
     }
 }
