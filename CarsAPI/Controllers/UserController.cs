@@ -1,4 +1,6 @@
-﻿using CarsAPI.Interfaces;
+﻿
+using CarsAPI.EF;
+using CarsAPI.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,13 +21,13 @@ namespace CarsAPI.Controllers
         [HttpGet]
         public IActionResult GetAllUsers()
         {
-            var users = _userRepository.GetAllUsers();
+            var users = _userRepository.GetAllUsers().ToString().ToList();
             if (users.Count() == 0)
             {
                 return BadRequest("No Current Users");
             }
           
-            return Ok(users);
+            return  Ok(users);
         }
 
         [Route("GetUser/{id}")]
@@ -59,15 +61,16 @@ namespace CarsAPI.Controllers
         [HttpPut]
         public IActionResult UpdateUser(int id, string first, string last, string email, string username)
         {
-            var user = _userRepository.GetUserById(id); 
-            if(user is null)
+            var user = _userRepository.GetUserById(id);
+
+            if (user is null)
             {
-                return BadRequest("User Not Found"); 
+                return BadRequest("User Not Found");
             }
 
             var updatedUser = _userRepository.UpdateUser(user, first, last, email, username);
 
-            return Ok(updatedUser); 
+            return Ok(updatedUser);
         }
 
 

@@ -14,7 +14,7 @@ namespace CarsAPI.Repository
             _context = context;
         }
 
-        public async Task<User> CreateNewUserAsync(string firstName, string lastName, string email, string username)
+        public  User CreateNewUser(string firstName, string lastName, string email, string username)
         {
             var newUser = new User()
             {
@@ -23,15 +23,15 @@ namespace CarsAPI.Repository
                 Email = email,
                 Username = username
             }; 
-            var user = await _context.Users.AddAsync(newUser);
-            await _context.SaveChangesAsync();
-            return user.Entity;
+             _context.Users.Add(newUser);
+             _context.SaveChanges();
+            return newUser;
            
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            return _context.Users.ToList();
+            return  _context.Users.ToList();
         }
 
         public User GetUserById(int id)
@@ -46,10 +46,10 @@ namespace CarsAPI.Repository
             updatedUser.Email = email;
             updatedUser.Username = username;
 
-            _context.Users.Attach(updatedUser);
-            _context.SaveChanges();
+             _context.Users.Attach(updatedUser);
+             _context.SaveChanges();
 
-            return updatedUser; 
+            return user;
             
         }
     }
